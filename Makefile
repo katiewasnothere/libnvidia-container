@@ -9,11 +9,11 @@
 
 WITH_LIBELF  ?= no
 WITH_TIRPC   ?= no
-WITH_SECCOMP ?= yes
+WITH_SECCOMP ?= no
 
 ##### Global definitions #####
 
-export prefix      = /usr/local
+export prefix      = /nvidia
 export exec_prefix = $(prefix)
 export bindir      = $(exec_prefix)/bin
 export libdir      = $(exec_prefix)/lib
@@ -113,7 +113,7 @@ CFLAGS   := -std=gnu11 -O2 -g -fdata-sections -ffunction-sections -fstack-protec
             -Wwrite-strings -Wlogical-op -Wformat=2 -Wmissing-format-attribute -Winit-self -Wshadow \
             -Wstrict-prototypes -Wunreachable-code -Wconversion -Wsign-conversion \
             -Wno-unknown-warning-option -Wno-format-extra-args -Wno-gnu-alignof-expression $(CFLAGS)
-LDFLAGS  := -Wl,-zrelro -Wl,-znow -Wl,-zdefs -Wl,--gc-sections $(LDFLAGS)
+LDFLAGS  := -Wl,-zrelro -Wl,-znow -Wl,-zdefs -Wl,--gc-sections -Wl,--dynamic-linker=/lib/ld-linux-x86-64.so.2 $(LDFLAGS)
 LDLIBS   := $(LDLIBS)
 
 # Library flags (recursively expanded to handle target-specific flags)
