@@ -52,6 +52,8 @@ struct context {
         char *devices;
 };
 
+bool matches_pci_format(char *gpu, char *buf, int bufsize);
+
 int select_devices(struct error *, char *, const struct nvc_device *[],
     const struct nvc_device [], size_t);
 
